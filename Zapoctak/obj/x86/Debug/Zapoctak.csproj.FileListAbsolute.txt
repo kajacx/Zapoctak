@@ -1,0 +1,9 @@
+C:\kajacx\programming\C#\Zapoctak\Zapoctak\obj\x86\Debug\Zapoctak.Properties.Resources.resources
+C:\kajacx\programming\C#\Zapoctak\Zapoctak\obj\x86\Debug\Zapoctak.csproj.GenerateResource.Cache
+C:\kajacx\programming\C#\Zapoctak\Zapoctak\bin\Debug\Zapoctak.exe
+C:\kajacx\programming\C#\Zapoctak\Zapoctak\bin\Debug\Zapoctak.pdb
+C:\kajacx\programming\C#\Zapoctak\Zapoctak\obj\x86\Debug\Zapoctak.exe
+C:\kajacx\programming\C#\Zapoctak\Zapoctak\obj\x86\Debug\Zapoctak.pdb
+C:\kajacx\programming\C#\Zapoctak\Zapoctak\obj\x86\Debug\Zapoctak.csprojResolveAssemblyReference.cache
+C:\kajacx\programming\C#\Zapoctak\Zapoctak\obj\x86\Debug\Zapoctak.Form1.resources
+C:\kajacx\programming\C#\Zapoctak\Zapoctak\obj\x86\Debug\Zapoctak.UserControl1.resources

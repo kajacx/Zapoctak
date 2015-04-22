@@ -1,0 +1,4 @@
+# character name, maxhp, dmg, armor, maxmp, magic, resist, texturename
+Knight            250     50     10     70     30      10  knight.png
+Fighter           200     80      8     80     35       5  fighter.png
+Wizzard           150     30      5    180     50       8  wizzard.png
