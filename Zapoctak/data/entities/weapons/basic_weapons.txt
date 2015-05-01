@@ -1,0 +1,9 @@
+# weapon name, maxhp, dmg, armor, maxmp, magic, resist, cost, texturename
+Wooden Sword       0    5      0      0      0       0    50  wooden_sword.png
+Stone Sword        0   10      2      0      0       0   150  stone_sword.png
+Iron Sword         0   20      4      0      5       3   300  iron_sword.png
+Diamond Sword     20   35      8     10     10       5   500  diamond_sword.png
+
+Wooden Staff       0    5      0     50     10       0    80  wooden_sword.png
+Ruby Staff         0   10      0     30     20       5   250  wooden_sword.png
+Emerald Staff      0   20      0     80     35      10   500  wooden_sword.png

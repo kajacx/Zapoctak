@@ -1,0 +1,5 @@
+# armor name, maxhp, dmg, armor, maxmp, magic, resist, cost, texturename
+Iron Shield      15    0     15      0      0      10   150  iron_shield.png
+AD Shield        12    5     30      0      0      8    200  ad_shield.png
+AP Shield        10    0     12     10      5      30   200  ap_shield.png
+HP Shield        50    0     15      0      0      10   250  hp_shield.png

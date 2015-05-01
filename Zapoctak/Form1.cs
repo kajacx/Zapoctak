@@ -15,6 +15,7 @@ namespace Zapoctak
     public partial class Form1 : Form
     {
         private CharacterSelection charSel = new CharacterSelection();
+        private EquipSelection equipSel = new EquipSelection();
         private UserControl1 control;
 
         public Form1()
@@ -36,10 +37,19 @@ namespace Zapoctak
         private void initStuff()
         {
             TextureManager.initAll();
-            CharacterInfo.allInfos = ResourceManager.readCharInfos();
+            CharacterInfo.allInfos = CharacterLoader.readCharInfos();
+
+            //character selection
             control.bind(charSel);
             charSel.control = control;
             charSel.bindHadlers();
+
+            //equip selection
+            control.bind(equipSel);
+            equipSel.init();
+
+            //bind character and equip
+            charSel.characterChangedEvent += new CharacterSelection.CharacterChanged(equipSel.setCharacter);
         }
 
     }

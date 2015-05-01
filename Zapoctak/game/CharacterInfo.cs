@@ -9,7 +9,7 @@ namespace Zapoctak.game
 
         public int id;
         public string name;
-        public double maxhp, attack, armor, maxmp, magic, resist;
+        public Stats stats = new Stats();
         public Image image;
 
         public static CharacterInfo next(CharacterInfo info, int offset)

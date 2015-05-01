@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
 using Zapoctak.game;
 using Zapoctak.resources;
 
@@ -7,19 +8,33 @@ namespace Zapoctak.gui
 {
     public class CharacterSelection
     {
+        public delegate void CharacterChanged(Character newChar); //can be null
+        public event CharacterChanged characterChangedEvent;
+
         const int maxChars = 4;
         const string addString = "Add";
         const string removeString = "Remove";
-        const string undefinedString = "Undefined";
+        const string undefinedString = "Unknown";
+
+        private Color unselectedCol = Color.Transparent;
+        private Color selectedCol = Color.Red;
 
         public Button[] addRemove = new Button[maxChars];
         public Button[] prev = new Button[maxChars];
         public Button[] next = new Button[maxChars];
         public Label[] classLabel = new Label[maxChars];
         public PictureBox[] pictures = new PictureBox[maxChars];
-        public CharacterInfo[] currentSelection = new CharacterInfo[maxChars];
+        public Character[] currentSelection = new Character[maxChars];
+        public bool[] selected = new bool[maxChars];
 
         public UserControl1 control;
+
+        public CharacterSelection()
+        {
+            for(int i = 0; i<maxChars; i++) {
+                currentSelection[i] = new Character();
+            }
+        }
 
         public void bindHadlers()
         {
@@ -33,12 +48,19 @@ namespace Zapoctak.gui
 
                 next[i].Tag = i;
                 next[i].Click += new EventHandler(nextHandler);
+
+                classLabel[i].Tag = pictures[i].Tag = i;
+                classLabel[i].Click += new EventHandler(focusHandler);
+                pictures[i].Click += new EventHandler(focusHandler);
             }
         }
 
         private void updateByCurrent(int id)
         {
-            if (currentSelection[id] == null)
+            for (int i = 0; i < maxChars; i++) classLabel[i].BackColor = unselectedCol;
+            classLabel[id].BackColor = selectedCol;
+
+            if (!selected[id])
             {
                 addRemove[id].Text = addString;
                 classLabel[id].Text = undefinedString;
@@ -47,22 +69,24 @@ namespace Zapoctak.gui
             else
             {
                 addRemove[id].Text = removeString;
-                classLabel[id].Text = currentSelection[id].name;
-                pictures[id].Image = currentSelection[id].image;
+                classLabel[id].Text = currentSelection[id].info.name;
+                pictures[id].Image = currentSelection[id].info.image;
             }
+            characterChangedEvent(selected[id] ? currentSelection[id] : null);
             control.Refresh();
         }
 
         private void addRemoveHandler(object Sender, EventArgs args)
         {
             int id = (int) ((Control)Sender).Tag;
-            if (currentSelection[id] == null)
+            if (!selected[id])
             {
-                currentSelection[id] = CharacterInfo.allInfos[0];
+                currentSelection[id].info = CharacterInfo.allInfos[0];
+                selected[id] = true;
             }
             else
             {
-                currentSelection[id] = null;
+                selected[id] = false;
             }
             updateByCurrent(id);
         }
@@ -70,9 +94,9 @@ namespace Zapoctak.gui
         private void prevHandler(object Sender, EventArgs args)
         {
             int id = (int)((Control)Sender).Tag;
-            if (currentSelection[id] != null)
+            if (selected[id])
             {
-                currentSelection[id] = CharacterInfo.next(currentSelection[id], -1);
+                currentSelection[id].info = CharacterInfo.next(currentSelection[id].info, -1);
                 updateByCurrent(id);
             }
         }
@@ -80,11 +104,17 @@ namespace Zapoctak.gui
         private void nextHandler(object Sender, EventArgs args)
         {
             int id = (int)((Control)Sender).Tag;
-            if (currentSelection[id] != null)
+            if (selected[id])
             {
-                currentSelection[id] = CharacterInfo.next(currentSelection[id], 1);
+                currentSelection[id].info = CharacterInfo.next(currentSelection[id].info, 1);
                 updateByCurrent(id);
             }
+        }
+
+        private void focusHandler(object Sender, EventArgs args)
+        {
+            int id = (int)((Control)Sender).Tag;
+            updateByCurrent(id);
         }
     }
 }

@@ -10,73 +10,10 @@ namespace Zapoctak.resources
     {
         public static FileInfo loadFile(string path)
         {
-            return new FileInfo("../../" + path);
+            FileInfo fi = new FileInfo("../../" + path);
+            if (!fi.Exists) Log.w("Loading non-existing file: " + fi);
+            return fi;
         }
-
-        public static CharacterInfo[] readCharInfos()
-        {
-            var dir = loadFile("data/entities/characters");
-
-            var infos = new List<CharacterInfo>();
-
-            foreach (var name in Directory.GetFiles(dir.FullName))
-            {
-                addCharacterInfos(name, infos);
-            }
-
-            return infos.ToArray();
-        }
-
-        private static void addCharacterInfos(string filename, List<CharacterInfo> list)
-        {
-            var stream = new Reader(filename);
-
-            while (!stream.EOF())
-            {
-                string line = stream.Line().Trim();
-                if (line.Length == 0 || line.StartsWith("#"))
-                {
-                    continue;
-                }
-                CharacterInfo info = fromLine(line);
-                if (info != null)
-                {
-                    info.id = list.Count;
-                    list.Add(info);
-                }
-            }
-
-            stream.Close();
-        }
-
-        private static CharacterInfo fromLine(string line)
-        {
-            string[] words = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
-            if (words.Length < 8)
-            {
-                Log.e("not enought arguments when creating character: " + line);
-                return null;
-            }
-            CharacterInfo info = new CharacterInfo();
-            info.name = words[0];
-
-            try
-            {
-                info.maxhp = Double.Parse(words[1], CultureInfo.InvariantCulture);
-                info.attack = Double.Parse(words[2], CultureInfo.InvariantCulture);
-                info.armor = Double.Parse(words[3], CultureInfo.InvariantCulture);
-                info.maxmp = Double.Parse(words[4], CultureInfo.InvariantCulture);
-                info.magic = Double.Parse(words[5], CultureInfo.InvariantCulture);
-                info.resist = Double.Parse(words[6], CultureInfo.InvariantCulture);
-            }
-            catch (Exception ex)
-            {
-                Log.e("Parse error in character: " + line, ex);
-            }
-
-            info.image = TextureManager.getCharacterTexture(words[7]);
-
-            return info;
-        }
+        
     }
 }
