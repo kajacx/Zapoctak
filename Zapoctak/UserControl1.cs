@@ -91,6 +91,8 @@ namespace Zapoctak
             sel.images[EquipSelection.ROW_SUM] = pictureBox8;
 
             sel.purchasePanel = panel1;
+            sel.weaponPanel = panel2;
+            sel.armorPanel = panel3;
         }
     }
 }

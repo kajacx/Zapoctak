@@ -36,8 +36,11 @@ namespace Zapoctak
 
         private void initStuff()
         {
+            //load data from files
             TextureManager.initAll();
-            CharacterInfo.allInfos = CharacterLoader.readCharInfos();
+            CharacterInfo.allInfos = FileLineLoader.LoadCharInfos();
+            Equip.allWeapons = FileLineLoader.LoadWeapons();
+            Equip.allArmors = FileLineLoader.LoadArmors();
 
             //character selection
             control.bind(charSel);

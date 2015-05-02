@@ -13,26 +13,62 @@ namespace Zapoctak.gui
 
         public Label[,] allLabels = new Label[4, 8];
         public PictureBox[] images = new PictureBox[4];
-        public Panel purchasePanel;
+        public Panel purchasePanel, weaponPanel, armorPanel;
 
         private const string defChar = "generic_character.png",
             defWeapon = "generic_weapon.png", defArmor = "generic_armor.png";
         private const string defText = "-", sumText = "Sum";
 
+        private Panel purchaseWeapons, purchaseArmors, purchaseNothing;
+
         public void init()
         {
-            FlowLayoutPanel panel = new FlowLayoutPanel();
-            panel.FlowDirection = FlowDirection.TopDown;
-            panel.AutoSize = true;
-            panel.Width = purchasePanel.Width-20;
+            purchaseWeapons = new FlowLayoutPanel();
+            purchaseArmors = new FlowLayoutPanel();
+            Panel[] panels = { purchaseWeapons, purchaseArmors };
+            Equip[][] equips = { Equip.allWeapons, Equip.allArmors };
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 2; i++)
             {
-                Label l = new Label();
-                l.Text = "Test " + i;
-                panel.Controls.Add(l);
+                ((FlowLayoutPanel)panels[i]).FlowDirection = FlowDirection.TopDown;
+                panels[i].AutoSize = true;
+                panels[i].Width = purchasePanel.Width - 25;
+
+                Label none = new Label();
+                none.Text = "          (None)"; //trolling lvl = over 8000
+                none.Width = 100;
+                none.Height = 20;
+                panels[i].Controls.Add(none);
+
+                foreach (Equip e in equips[i])
+                {
+                    FlowLayoutPanel row = new FlowLayoutPanel();
+                    row.FlowDirection = FlowDirection.LeftToRight;
+                    row.Width = panels[i].Width;
+                    row.Height = 20;
+
+                    PictureBox box = new PictureBox();
+                    box.Image = e.image;
+                    box.Width = box.Height = row.Height;
+                    box.SizeMode = PictureBoxSizeMode.StretchImage;
+                    row.Controls.Add(box);
+
+                    Label name = new Label();
+                    name.Text = e.name;
+                    name.Width = 100;
+                    name.Height = row.Height;
+                    row.Controls.Add(name);
+
+                    Label cost = new Label();
+                    cost.Text = e.cost.ToString();
+                    cost.AutoSize = true;
+                    row.Controls.Add(cost);
+
+                    panels[i].Controls.Add(row);
+                }
             }
-            purchasePanel.Controls.Add(panel);
+
+            purchasePanel.Controls.Add(panels[1]);
         }
 
         public void setCharacter(Character charac)
@@ -51,7 +87,7 @@ namespace Zapoctak.gui
             }
             else
             {
-                allLabels[ROW_CHAR,COL_NAME].Text = charac.info.name;
+                allLabels[ROW_CHAR, COL_NAME].Text = charac.info.name;
                 images[ROW_CHAR].Image = charac.info.image;
                 charac.recomputeStats();
 
