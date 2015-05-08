@@ -49,6 +49,7 @@ namespace Zapoctak
 
             //equip selection
             control.bind(equipSel);
+            equipSel.control = control;
             equipSel.init();
 
             //bind character and equip

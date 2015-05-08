@@ -23,5 +23,10 @@ namespace Zapoctak.game
                 stats.setStat(i, info.stats.getStat(i) + w.getStat(i) + a.getStat(i));
             }
         }
+
+        public void unequip()
+        {
+            weapon = armor = null;
+        }
     }
 }

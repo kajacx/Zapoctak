@@ -15,5 +15,5 @@ namespace Zapoctak.game
         public EquipType type;
     }
 
-    public enum EquipType {WEAPON, ARMOR};
+    public enum EquipType {NULL, WEAPON, ARMOR};
 }

@@ -12,6 +12,7 @@ namespace Zapoctak.resources
         private static Dictionary<String, Image> textures = new Dictionary<string,Image>();
 
         public const string noChar = "no_character.png";
+        public const string defWeapon = "";
 
         private static Image loadFromFile(string path)
         {

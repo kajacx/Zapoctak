@@ -5,13 +5,8 @@ using System.Text;
 
 namespace Zapoctak
 {
-    class Log
+    static class Log
     {
-        public static void w(String msg)
-        {
-            Console.WriteLine("Warning: "+msg);
-        }
-
         public static void e(String msg)
         {
             Console.WriteLine("Error: " + msg);
@@ -21,6 +16,16 @@ namespace Zapoctak
         {
             Console.WriteLine("Error with exeption: " + msg);
             Console.WriteLine("Exception: " + ex);
+        }
+
+        public static void w(String msg)
+        {
+            Console.WriteLine("Warning: "+msg);
+        }
+
+        public static void d(String msg)
+        {
+            Console.WriteLine("Debug: " + msg);
         }
     }
 }

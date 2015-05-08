@@ -102,14 +102,6 @@ namespace Zapoctak
             this.label49 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label57 = new System.Windows.Forms.Label();
-            this.label56 = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -760,7 +752,6 @@ namespace Zapoctak
             // 
             // panel1
             // 
-            this.panel1.AutoScroll = true;
             this.panel1.Location = new System.Drawing.Point(356, 253);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(193, 118);
@@ -782,89 +773,9 @@ namespace Zapoctak
             this.panel2.Size = new System.Drawing.Size(301, 20);
             this.panel2.TabIndex = 70;
             // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(30, 6);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(10, 13);
-            this.label57.TabIndex = 44;
-            this.label57.Text = "-";
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(103, 6);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(10, 13);
-            this.label56.TabIndex = 45;
-            this.label56.Text = "-";
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(131, 6);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(10, 13);
-            this.label55.TabIndex = 46;
-            this.label55.Text = "-";
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(161, 6);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(10, 13);
-            this.label54.TabIndex = 47;
-            this.label54.Text = "-";
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(187, 6);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(10, 13);
-            this.label53.TabIndex = 48;
-            this.label53.Text = "-";
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(215, 6);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(10, 13);
-            this.label52.TabIndex = 49;
-            this.label52.Text = "-";
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(243, 6);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(10, 13);
-            this.label51.TabIndex = 50;
-            this.label51.Text = "-";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(275, 6);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(10, 13);
-            this.label50.TabIndex = 51;
-            this.label50.Text = "-";
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
-            this.panel3.Controls.Add(this.label50);
-            this.panel3.Controls.Add(this.label51);
-            this.panel3.Controls.Add(this.label52);
-            this.panel3.Controls.Add(this.label53);
-            this.panel3.Controls.Add(this.label54);
-            this.panel3.Controls.Add(this.label55);
-            this.panel3.Controls.Add(this.label56);
-            this.panel3.Controls.Add(this.label57);
             this.panel3.Controls.Add(this.label40);
             this.panel3.Controls.Add(this.label39);
             this.panel3.Controls.Add(this.label33);
@@ -1031,14 +942,6 @@ namespace Zapoctak
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Label label53;
-        private System.Windows.Forms.Label label52;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Panel panel3;
     }
 }
