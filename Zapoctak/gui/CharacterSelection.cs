@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Drawing;
 using Zapoctak.game;
@@ -11,7 +12,7 @@ namespace Zapoctak.gui
         public delegate void CharacterChanged(Character newChar); //can be null
         public event CharacterChanged characterChangedEvent;
 
-        const int maxChars = 4;
+        public const int maxChars = 4;
         const string addString = "Add";
         const string removeString = "Remove";
         const string undefinedString = "Unknown";
@@ -34,6 +35,14 @@ namespace Zapoctak.gui
             for(int i = 0; i<maxChars; i++) {
                 currentSelection[i] = new Character();
             }
+        }
+
+        public Character[] gatherChars()
+        {
+            List<Character> chars = new List<Character>();
+            for (int i = 0; i < maxChars; i++)
+                if (selected[i]) chars.Add(currentSelection[i]);
+            return chars.ToArray();
         }
 
         public void bindHadlers()

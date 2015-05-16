@@ -24,12 +24,6 @@ namespace Zapoctak
             control = new UserControl1();
             initStuff();
 
-            MyPanel panel = new MyPanel();
-            panel.Size = new Size(512,512);
-            panel.BackColor = Color.Azure;
-
-            //Controls.Add(panel);
-
             Controls.Add(control);
 
         }
@@ -54,29 +48,28 @@ namespace Zapoctak
 
             //bind character and equip
             charSel.characterChangedEvent += new CharacterSelection.CharacterChanged(equipSel.setCharacter);
+
+            //play button
+            control.getPlayButton().Click += new EventHandler(playPressed);
         }
 
-    }
-
-    class MyPanel : Panel
-    {
-        protected override void OnPaint(PaintEventArgs pe)
+        private void playPressed(object sender, EventArgs args)
         {
-            base.OnPaint(pe);
-            Graphics g= pe.Graphics;
+            Controls.Remove(control);
 
-            g.TranslateTransform(256, 256);
+            Game game = createGame();
 
-            //now rotate the image
-            g.RotateTransform(30);
-        
-            g.TranslateTransform(-256, -256);
-
-            Image img = TextureManager.getOtherTexture("test_measure.png");
-            //Console.WriteLine(img.Width);
-            //Console.WriteLine(img.Height);
-            g.DrawImage(img, 0, 0, 512, 512);
-            //g.DrawImage(img, 0, 0);
+            Controls.Add(new RenderPanel(game));
+            Refresh();
         }
+
+        private Game createGame()
+        {
+            Game game = new Game();
+            game.characters = charSel.gatherChars();
+            game.players = game.characters.Length;
+            return game;
+        }
+
     }
 }

@@ -11,7 +11,9 @@ namespace Zapoctak.resources
         public static FileInfo loadFile(string path)
         {
             FileInfo fi = new FileInfo("../../" + path);
-            if (!fi.Exists) Log.w("Loading non-existing file: " + fi);
+            Log.i("Loading file: "+fi);
+            if (!fi.Exists && !Directory.Exists(fi.FullName))
+                Log.w("Loading non-existing file: " + fi);
             return fi;
         }
         

@@ -103,6 +103,7 @@ namespace Zapoctak
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.playButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -789,10 +790,20 @@ namespace Zapoctak
             this.panel3.Size = new System.Drawing.Size(301, 20);
             this.panel3.TabIndex = 71;
             // 
+            // playButton
+            // 
+            this.playButton.Location = new System.Drawing.Point(30, 417);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(75, 23);
+            this.playButton.TabIndex = 72;
+            this.playButton.Text = "Play";
+            this.playButton.UseVisualStyleBackColor = true;
+            // 
             // UserControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.playButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label49);
             this.Controls.Add(this.label41);
@@ -943,5 +954,6 @@ namespace Zapoctak
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button playButton;
     }
 }

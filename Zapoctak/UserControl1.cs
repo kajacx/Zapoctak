@@ -94,5 +94,10 @@ namespace Zapoctak
             sel.weaponPanel = panel2;
             sel.armorPanel = panel3;
         }
+
+        public Button getPlayButton()
+        {
+            return playButton;
+        }
     }
 }

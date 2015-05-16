@@ -58,11 +58,15 @@
     <Compile Include="game\Effect.cs" />
     <Compile Include="game\Entity.cs" />
     <Compile Include="game\Equip.cs" />
+    <Compile Include="game\Game.cs" />
     <Compile Include="game\Magic.cs" />
     <Compile Include="game\Stats.cs" />
     <Compile Include="graphics\Sprite.cs" />
     <Compile Include="gui\CharacterSelection.cs" />
     <Compile Include="gui\EquipSelection.cs" />
+    <Compile Include="gui\RenderPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +74,7 @@
     <Compile Include="resources\Reader.cs" />
     <Compile Include="resources\ResourceManager.cs" />
     <Compile Include="resources\TextureManager.cs" />
+    <Compile Include="U.cs" />
     <Compile Include="UserControl1.cs">
       <SubType>UserControl</SubType>
     </Compile>

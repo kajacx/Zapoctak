@@ -20,7 +20,12 @@ namespace Zapoctak
 
         public static void w(String msg)
         {
-            Console.WriteLine("Warning: "+msg);
+            Console.WriteLine("Warning: " + msg);
+        }
+
+        public static void i(String msg)
+        {
+            Console.WriteLine("Info: " + msg);
         }
 
         public static void d(String msg)

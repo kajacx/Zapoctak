@@ -28,5 +28,12 @@ namespace Zapoctak.game
         {
             weapon = armor = null;
         }
+
+        public override string ToString()
+        {
+            return "[Char] Class: " + info.name
+               + ", weapon: " + U.ToString(weapon)
+               + ", armor: " + U.ToString(armor);
+        }
     }
 }

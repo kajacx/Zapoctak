@@ -13,6 +13,11 @@ namespace Zapoctak.game
         public Stats stats = new Stats();
         public Image image;
         public EquipType type;
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 
     public enum EquipType {NULL, WEAPON, ARMOR};
