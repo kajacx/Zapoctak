@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Zapoctak.resources;
 using Zapoctak.game;
+using Zapoctak.game.monsters;
 using Zapoctak.gui;
 
 namespace Zapoctak
@@ -51,6 +52,9 @@ namespace Zapoctak
 
             //play button
             control.getPlayButton().Click += new EventHandler(playPressed);
+
+            //monster infos
+            MonsterInfo.allMonsterInfos = FileLineLoader.LoadMonstersInfos();
         }
 
         private void playPressed(object sender, EventArgs args)
@@ -65,9 +69,7 @@ namespace Zapoctak
 
         private Game createGame()
         {
-            Game game = new Game();
-            game.characters = charSel.gatherChars();
-            game.players = game.characters.Length;
+            Game game = new Game(charSel.gatherChars());
             return game;
         }
 

@@ -38,5 +38,12 @@ namespace Zapoctak.game
                 default: Log.e("Invalid stat id: " + id); break;
             }
         }
+
+        public Stats Clone()
+        {
+            Stats ret = new Stats();
+            for (int i = 0; i < 6; i++) ret.setStat(i, getStat(i));
+            return ret;
+        }
     }
 }

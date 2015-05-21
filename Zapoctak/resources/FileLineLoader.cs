@@ -4,6 +4,7 @@ using System.IO;
 using System.Globalization;
 
 using Zapoctak.game;
+using Zapoctak.game.monsters;
 
 namespace Zapoctak.resources
 {
@@ -32,6 +33,19 @@ namespace Zapoctak.resources
             return ret;
         }
 
+        public static MonsterInfo[] LoadMonstersInfos()
+        {
+            var data = loadFromDir("data/entities/monsters", monsterOrActionFromLine);
+            var ret = new List<MonsterInfo>();
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (data[i] is MonsterInfo) ret.Add((MonsterInfo) data[i]);
+                else ret[ret.Count - 1].plans.Add((Plan)data[i]);
+            }
+            ret.ForEach(m => m.countProbSum());
+            return ret.ToArray();
+        }
+
         private static T[] loadFromDir<T>(String dirName, lineParser<T> parser)
         {
             var dir = ResourceManager.loadFile(dirName);
@@ -56,10 +70,17 @@ namespace Zapoctak.resources
                 {
                     continue;
                 }
-                T info = parser(line);
-                if (info != null)
+                try
                 {
-                    list.Add(info);
+                    T info = parser(line);
+                    if (info != null)
+                    {
+                        list.Add(info);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log.e("Error in loading line: "+line, ex);
                 }
             }
 
@@ -121,6 +142,35 @@ namespace Zapoctak.resources
             equip.image = TextureManager.getEquipTexture(words[8]);
 
             return equip;
+        }
+
+        private static Object monsterOrActionFromLine(string line)
+        {
+            string[] words = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+            if (words[0].Equals("monster")) return (Object) monsterFromWords(words);
+            else if (words[0].Equals("plan")) return (Object) planFromWords(words);
+            Log.w("Input error, not monter nor plan: "+words[0]);
+            return null;
+        }
+
+        private static MonsterInfo monsterFromWords(string[] words)
+        {
+            MonsterInfo ret = new MonsterInfo();
+            ret.name = words[1].Replace("_", " ");
+
+            for (int i = 0; i < 6; i++)
+            {
+                ret.stats.setStat(i, Double.Parse(words[i + 2], CultureInfo.InvariantCulture));
+            }
+            ret.spawnProb = Double.Parse(words[8], CultureInfo.InvariantCulture);
+            ret.difficulty = Double.Parse(words[9], CultureInfo.InvariantCulture);
+            ret.texture = TextureManager.getMonsterTexture(words[10]);
+            return ret;
+        }
+
+        private static Plan planFromWords(string[] words)
+        {
+            return null;
         }
     }
 }

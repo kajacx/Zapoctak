@@ -7,6 +7,8 @@ namespace Zapoctak
 {
     class U
     {
+        public static Random ran = new Random();
+
         public static String ToString(object obj)
         {
             return (obj ?? "null").ToString();

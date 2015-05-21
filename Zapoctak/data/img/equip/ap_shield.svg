@@ -15,7 +15,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="ap_shield.svg">
+   sodipodi:docname="ap_shield.svg"
+   inkscape:export-filename="C:\kajacx\programming\C#\Zapoctak\Zapoctak\data\img\equip\ap_shield.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <linearGradient
@@ -48,7 +51,8 @@
        y1="798.62506"
        x2="466.01886"
        y2="798.62506"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.1498287,0,0,1.1567556,-41.277494,-129.4746)" />
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient5297"
@@ -57,7 +61,8 @@
        y1="798.62506"
        x2="466.01886"
        y2="798.62506"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.1498287,0,0,1.1567556,-41.277494,-129.4746)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -95,8 +100,8 @@
      id="layer1"
      transform="translate(0,-540.36218)">
     <path
-       style="fill:url(#linearGradient5303);stroke:url(#linearGradient5287);stroke-width:15;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1.0;stroke-miterlimit:4;stroke-dasharray:none"
-       d="M 54.338278,636.20412 C 223.46748,505.87039 252.53332,746.39339 458.51886,637.7828 c 0,0 -52.28267,360.00312 -191.03847,363.0964 C 128.72459,1003.9725 54.338278,636.20412 54.338278,636.20412 z"
+       style="fill:url(#linearGradient5303);fill-opacity:1;stroke:url(#linearGradient5287);stroke-width:17.29930305;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 21.202215,606.45802 c 194.469605,-150.76425 227.890345,127.46205 464.738425,1.82615 0,0 -60.11612,416.43563 -219.66151,420.01373 C 106.73373,1031.8761 21.202215,606.45802 21.202215,606.45802 z"
        id="path3063"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cczc" />

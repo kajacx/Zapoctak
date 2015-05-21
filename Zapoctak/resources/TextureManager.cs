@@ -63,5 +63,10 @@ namespace Zapoctak.resources
         {
             return getTexture("data/img/other/" + name);
         }
+
+        public static Image getMonsterTexture(string name)
+        {
+            return getTexture("data/img/monsters/" + name);
+        }
     }
 }

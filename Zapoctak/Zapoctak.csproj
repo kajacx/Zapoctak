@@ -60,8 +60,14 @@
     <Compile Include="game\Equip.cs" />
     <Compile Include="game\Game.cs" />
     <Compile Include="game\Magic.cs" />
+    <Compile Include="game\monsters\Monster.cs" />
+    <Compile Include="game\monsters\MonsterSpawner.cs" />
+    <Compile Include="game\monsters\Plan.cs" />
+    <Compile Include="game\monsters\Attack.cs" />
+    <Compile Include="game\monsters\MonsterInfo.cs" />
+    <Compile Include="game\monsters\UseMagic.cs" />
     <Compile Include="game\Stats.cs" />
-    <Compile Include="graphics\Sprite.cs" />
+    <Compile Include="gui\Sprite.cs" />
     <Compile Include="gui\CharacterSelection.cs" />
     <Compile Include="gui\EquipSelection.cs" />
     <Compile Include="gui\RenderPanel.cs">
@@ -122,6 +128,7 @@
   <ItemGroup>
     <None Include="data\img\other\sum.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -16,7 +16,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="iron_shield.svg">
+   sodipodi:docname="iron_shield.svg"
+   inkscape:export-filename="C:\kajacx\programming\C#\Zapoctak\Zapoctak\data\img\equip\iron_shield.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <linearGradient
@@ -24,9 +27,9 @@
       <stop
          id="stop5223"
          offset="0"
-         style="stop-color:#333333;stop-opacity:0.41176471;" />
+         style="stop-color:#86adbd;stop-opacity:1;" />
       <stop
-         style="stop-color:#000000;stop-opacity:0;"
+         style="stop-color:#ddf8ff;stop-opacity:1;"
          offset="1"
          id="stop5219" />
     </linearGradient>
@@ -46,7 +49,8 @@
        y1="797.04745"
        x2="446.916"
        y2="797.04745"
-       gradientUnits="userSpaceOnUse" />
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.248602,0,0,1.301102,-60.791455,-239.4875)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -56,7 +60,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="311.84245"
+     inkscape:cx="154.25865"
      inkscape:cy="250.08112"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -74,7 +78,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -84,8 +88,8 @@
      id="layer1"
      transform="translate(0,-540.36218)">
     <path
-       style="fill:url(#linearGradient5221);stroke:#000000;stroke-width:15;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;fill-opacity:1"
-       d="M 256,973.04745 C 70.238655,854.05728 69.585482,823.90911 70,621.04745 c 62.05381,75.17537 125.81037,79.44526 186,0 41.10618,78.2491 127.50427,79.63285 183.416,0 -1.13298,243.94698 -3.01066,256.86719 -183.416,352 z"
+       style="fill:url(#linearGradient5221);fill-opacity:1;stroke:#000000;stroke-width:19.11872673;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 258.85067,1026.5465 C 26.908674,871.72813 26.09312,832.50229 26.610688,568.55858 c 77.480512,97.81082 157.087092,103.36639 232.239982,0 51.32526,101.81006 159.20209,103.61046 229.0136,0 -1.41465,317.3999 -3.75912,334.21041 -229.0136,457.98792 z"
        id="path2985"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccc" />
