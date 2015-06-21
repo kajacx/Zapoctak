@@ -8,7 +8,7 @@ namespace Zapoctak.resources
     class TextureManager
     {
         //ALL pathsin format: data/img/...
-        private const string NOT_FOUND = "data/img/other/texture_not_found.png";
+        private const string NOT_FOUND = "assets/img/other/texture_not_found.png";
         private static Dictionary<String, Image> textures = new Dictionary<string,Image>();
 
         public const string noChar = "no_character.png";
@@ -51,22 +51,22 @@ namespace Zapoctak.resources
         //only name with extension
         public static Image getEquipTexture(string name)
         {
-            return getTexture("data/img/equip/" + name);
+            return getTexture("assets/img/equip/" + name);
         }
 
         public static Image getCharacterTexture(string name)
         {
-            return getTexture("data/img/characters/" + name);
+            return getTexture("assets/img/characters/" + name);
         }
 
         public static Image getOtherTexture(string name)
         {
-            return getTexture("data/img/other/" + name);
+            return getTexture("assets/img/other/" + name);
         }
 
         public static Image getMonsterTexture(string name)
         {
-            return getTexture("data/img/monsters/" + name);
+            return getTexture("assets/img/monsters/" + name);
         }
     }
 }

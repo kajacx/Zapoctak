@@ -67,6 +67,10 @@
     <Compile Include="game\monsters\MonsterInfo.cs" />
     <Compile Include="game\monsters\UseMagic.cs" />
     <Compile Include="game\Stats.cs" />
+    <Compile Include="gui\DisplayBar.cs" />
+    <Compile Include="gui\DisplayPanel.cs" />
+    <Compile Include="gui\InfoPanel.cs" />
+    <Compile Include="gui\RowPanel.cs" />
     <Compile Include="gui\Sprite.cs" />
     <Compile Include="gui\CharacterSelection.cs" />
     <Compile Include="gui\EquipSelection.cs" />

@@ -38,19 +38,23 @@ namespace Zapoctak.gui
 
         private float[,] positions;
 
+        private InfoPanel infoPanel;
+        private Matrix infoMatrix;
+
         public RenderPanel(Game game)
         {
             this.game = game;
 
             float ratio = .75f;
             Width = (int)(width * ratio);
-            Height = (int)(height * ratio);
+            Height = 150+(int)(height * ratio);
 
             var margin = Margin;
             margin.All = 0;
             Margin = margin;
 
             initMatrices(ratio);
+            infoPanel = new InfoPanel(game.characters);
         }
 
         private void initMatrices(float ratio)
@@ -81,6 +85,10 @@ namespace Zapoctak.gui
 
             //dummy
             dummy = new Matrix();
+
+            //info
+            infoMatrix = new Matrix();
+            infoMatrix.Translate(0, ratio*height);
         }
 
         private void initPlayerPos()
@@ -122,18 +130,25 @@ namespace Zapoctak.gui
         {
             base.OnPaint(e);
             Graphics gr = e.Graphics;
+
             gr.Transform = projection;
             gr.DrawImage(background, 0, 0, width, height);
 
+            //characters
             for (int i = 0; i < game.characters.Length; i++)
             {
                 drawCharacter(gr, i);
             }
 
+            //monsters
             for (int i = 0; i < game.monsters.Length; i++)
             {
                 drawMonster(gr, game.monsters[i]);
             }
+
+            //info
+            gr.Transform = infoMatrix;
+            infoPanel.paint(gr);
         }
 
         //with projection

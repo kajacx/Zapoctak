@@ -55,6 +55,10 @@ namespace Zapoctak
 
             //monster infos
             MonsterInfo.allMonsterInfos = FileLineLoader.LoadMonstersInfos();
+
+            //drawing panels
+            DisplayPanel.Init();
+            RowPanel.Init();
         }
 
         private void playPressed(object sender, EventArgs args)

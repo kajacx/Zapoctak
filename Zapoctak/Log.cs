@@ -7,18 +7,18 @@ namespace Zapoctak
 {
     static class Log
     {
-        public const int LV_NONE = -1, LV_ERROR = 0, LV_WARNING = 1,
-                         LV_INFO = 2, LV_BATTLE = 3, LV_DEBUG =5, LV_ALL = 5;
+        public const int LV_NONE = 0, LV_ERROR = 1, LV_WARNING = 2, LV_INFO = 4,
+                         LV_BATTLE = 8, LV_DEBUG = 16, LV_ALL = 31;
         public static int lv = LV_ALL;
 
         public static void e(String msg)
         {
-            if(lv >= LV_ERROR) Console.WriteLine("Error: " + msg);
+            if ((lv & LV_ERROR) > 0) Console.WriteLine("Error: " + msg);
         }
 
         public static void e(String msg, Exception ex)
         {
-            if (lv >= LV_ERROR)
+            if ((lv & LV_ERROR) > 0)
             {
                 Console.WriteLine("Error with exeption: " + msg);
                 Console.WriteLine("Exception: " + ex);
@@ -27,22 +27,22 @@ namespace Zapoctak
 
         public static void w(String msg)
         {
-            if (lv >= LV_WARNING) Console.WriteLine("Warning: " + msg);
+            if ((lv & LV_WARNING) > 0) Console.WriteLine("Warning: " + msg);
         }
 
         public static void i(String msg)
         {
-            if (lv >= LV_INFO) Console.WriteLine("Info: " + msg);
+            if ((lv & LV_INFO) > 0) Console.WriteLine("Info: " + msg);
         }
 
         public static void b(String msg)
         {
-            if (lv >= LV_BATTLE) Console.WriteLine("Battle log: " + msg);
+            if ((lv & LV_BATTLE) > 0) Console.WriteLine("Battle log: " + msg);
         }
 
         public static void d(String msg)
         {
-            if (lv >= LV_DEBUG) Console.WriteLine("Debug: " + msg);
+            if ((lv & LV_DEBUG) > 0) Console.WriteLine("Debug: " + msg);
         }
     }
 }

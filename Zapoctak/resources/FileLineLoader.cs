@@ -14,28 +14,28 @@ namespace Zapoctak.resources
 
         public static CharacterInfo[] LoadCharInfos()
         {
-            var ret = loadFromDir("data/entities/characters", charFromLine);
+            var ret = loadFromDir("assets/entities/characters", charFromLine);
             for (int i = 0; i < ret.Length; i++) ret[i].id = i;
             return ret;
         }
 
         public static Equip[] LoadWeapons()
         {
-            var ret = loadFromDir("data/entities/weapons", equipFromLine);
+            var ret = loadFromDir("assets/entities/weapons", equipFromLine);
             for (int i = 0; i < ret.Length; i++) ret[i].type = EquipType.WEAPON;
             return ret;
         }
 
         public static Equip[] LoadArmors()
         {
-            var ret = loadFromDir("data/entities/armors", equipFromLine);
+            var ret = loadFromDir("assets/entities/armors", equipFromLine);
             for (int i = 0; i < ret.Length; i++) ret[i].type = EquipType.ARMOR;
             return ret;
         }
 
         public static MonsterInfo[] LoadMonstersInfos()
         {
-            var data = loadFromDir("data/entities/monsters", monsterOrActionFromLine);
+            var data = loadFromDir("assets/entities/monsters", monsterOrActionFromLine);
             var ret = new List<MonsterInfo>();
             for (int i = 0; i < data.Length; i++)
             {
