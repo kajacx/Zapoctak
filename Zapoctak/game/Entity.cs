@@ -15,5 +15,10 @@ namespace Zapoctak.game
             hp = stats.maxhp;
             mp = stats.maxmp;
         }
+
+        public void update(double dt)
+        {
+            time = Math.Min(1, time + dt * Game.timeLoadSpeed); 
+        }
     }
 }

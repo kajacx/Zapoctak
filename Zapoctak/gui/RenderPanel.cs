@@ -8,7 +8,7 @@ using Zapoctak.game.monsters;
 
 namespace Zapoctak.gui
 {
-    class RenderPanel : Panel
+    public class RenderPanel : Panel
     {
         private int[][] spliting = new int[][]{
             null, //indexing from 1 lol
@@ -44,6 +44,7 @@ namespace Zapoctak.gui
         public RenderPanel(Game game)
         {
             this.game = game;
+            game.panel = this;
 
             float ratio = .75f;
             Width = (int)(width * ratio);
@@ -55,6 +56,8 @@ namespace Zapoctak.gui
 
             initMatrices(ratio);
             infoPanel = new InfoPanel(game.characters);
+
+            this.DoubleBuffered = true;
         }
 
         private void initMatrices(float ratio)
@@ -124,6 +127,11 @@ namespace Zapoctak.gui
                     positions[game.characters.Length + k, 1] = y;
                 }
             }
+        }
+
+        public void update(double time)
+        {
+            infoPanel.update(time);
         }
 
         protected override void OnPaint(PaintEventArgs e)

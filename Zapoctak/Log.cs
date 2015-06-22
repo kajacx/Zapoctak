@@ -44,5 +44,10 @@ namespace Zapoctak
         {
             if ((lv & LV_DEBUG) > 0) Console.WriteLine("Debug: " + msg);
         }
+
+        public static void d(String format, params object[] args)
+        {
+            if ((lv & LV_DEBUG) > 0) Console.WriteLine("Debug: " + format, args);
+        }
     }
 }

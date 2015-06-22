@@ -69,6 +69,8 @@ namespace Zapoctak
 
             Controls.Add(new RenderPanel(game));
             Refresh();
+
+            game.Start();
         }
 
         private Game createGame()
