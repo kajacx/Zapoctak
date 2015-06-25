@@ -1,7 +1,7 @@
 #monster, name,          maxhp, dmg, armor, maxmp, magic, resist, spawnChance, difficulty, texturename
-monster   Monster_01     50      10      5     10      8       3           10          .4  monster_01.png
-monster   Monster_02     60      15     10      0      0       5            6          .5  monster_02.png
-monster   Monster_03     40      13      8      5      2       5            6          .5  monster_03.png
+monster   Monster_01     50      20      5     10      8       3           10          .4  monster_01.png
+monster   Monster_02     60      28     10      0      0       5            6          .5  monster_02.png
+monster   Monster_03     40      42      8      5      2       5            6          .6  monster_03.png
 
 #plan,    magic,   magicName,   target,   chance
 #action    magic         fire       FOE        10

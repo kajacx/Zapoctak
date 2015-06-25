@@ -1,5 +1,7 @@
 ﻿using System;
 using Zapoctak.graphics;
+using Zapoctak.game.events;
+using Zapoctak.game.monsters;
 
 namespace Zapoctak.game
 {
@@ -9,5 +11,10 @@ namespace Zapoctak.game
         public Effect effect;
         public int goldCost;
         public Sprite animation;
+
+        public bool update(double dt)
+        {
+            return true;
+        }
     }
 }

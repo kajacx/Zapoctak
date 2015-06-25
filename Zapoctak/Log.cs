@@ -37,7 +37,7 @@ namespace Zapoctak
 
         public static void b(String msg)
         {
-            if ((lv & LV_BATTLE) > 0) Console.WriteLine("Battle log: " + msg);
+            if ((lv & LV_BATTLE) > 0) Console.WriteLine("Battle: " + msg);
         }
 
         public static void d(String msg)

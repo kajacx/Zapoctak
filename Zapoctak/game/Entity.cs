@@ -3,12 +3,15 @@
 
 namespace Zapoctak.game
 {
-    public class Entity
+    public abstract class Entity
     {
         public int entityId;
         public Stats stats = new Stats();
         public double hp, mp;
         public double time; //0-1 
+
+        private bool timeReady;
+        public Game game;
 
         public void replenish()
         {
@@ -18,7 +21,23 @@ namespace Zapoctak.game
 
         public void update(double dt)
         {
-            time = Math.Min(1, time + dt * Game.timeLoadSpeed); 
+            if (!timeReady)
+            {
+                time += dt * Game.timeLoadSpeed;
+                if (time >= 1)
+                {
+                    timeReady = true;
+                    TimeReady();
+                }
+            }
+        }
+
+        public abstract void TimeReady();
+
+        public void TimeReset()
+        {
+            time = 0;
+            timeReady = false;
         }
     }
 }

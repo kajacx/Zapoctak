@@ -58,6 +58,11 @@
     <Compile Include="game\Effect.cs" />
     <Compile Include="game\Entity.cs" />
     <Compile Include="game\Equip.cs" />
+    <Compile Include="game\events\AttackEvent.cs" />
+    <Compile Include="game\events\Event.cs" />
+    <Compile Include="game\events\EventData.cs" />
+    <Compile Include="game\events\EventProcesser.cs" />
+    <Compile Include="game\events\MagicEvent.cs" />
     <Compile Include="game\Game.cs" />
     <Compile Include="game\Magic.cs" />
     <Compile Include="game\monsters\Monster.cs" />

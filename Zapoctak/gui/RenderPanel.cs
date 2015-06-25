@@ -36,6 +36,7 @@ namespace Zapoctak.gui
 
         private Matrix dummy;
 
+        private float[,] defaultPositions;
         private float[,] positions;
 
         private InfoPanel infoPanel;
@@ -70,9 +71,14 @@ namespace Zapoctak.gui
             entityMatrix.Scale(.2f, .2f);
 
             //entity positions
-            positions = new float[game.characters.Length+game.monsters.Length,2];
+            defaultPositions = new float[game.entities.Length, 2];
+            positions = new float[game.entities.Length, 2];
             initPlayerPos();
             initMonsterPos();
+            for(int i = 0; i<game.entities.Length; i++) {
+                positions[i, 0] = defaultPositions[i, 0];
+                positions[i, 1] = defaultPositions[i, 1];
+            }
 
             //equip
             weaponPos = new Matrix();
@@ -104,8 +110,8 @@ namespace Zapoctak.gui
             for (int i = 0; i < game.characters.Length; i++)
             {
                 float coef = i - (game.characters.Length - 1) / 2f;
-                positions[i, 0] = playerX + coef * playerDX;
-                positions[i, 1] = playerY + coef * playerDY;
+                defaultPositions[i, 0] = playerX + coef * playerDX;
+                defaultPositions[i, 1] = playerY + coef * playerDY;
             }
         }
 
@@ -123,8 +129,8 @@ namespace Zapoctak.gui
                 for (int j = 0; j < split[i]; j++, k++)
                 {
                     float y = monsterY + monsterDY * (j - (split[i] - 1) / 2f);
-                    positions[game.characters.Length + k, 0] = x;
-                    positions[game.characters.Length + k, 1] = y;
+                    defaultPositions[game.characters.Length + k, 0] = x;
+                    defaultPositions[game.characters.Length + k, 1] = y;
                 }
             }
         }
@@ -164,7 +170,7 @@ namespace Zapoctak.gui
         {
             dummy.Reset();
             dummy.Multiply(entityMatrix);
-            dummy.Translate(positions[entId, 0], positions[entId, 1], MatrixOrder.Append);
+            dummy.Translate(defaultPositions[entId, 0], defaultPositions[entId, 1], MatrixOrder.Append);
             dummy.Multiply(projection, MatrixOrder.Append);
         }
 

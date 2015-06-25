@@ -10,7 +10,7 @@ namespace Zapoctak.gui
 {
     public class DisplayBar
     {
-        private const double speed = 0.5f; //full bars per second
+        private const double speed = 0.2f; //full bars per second
 
         private Color background = Color.LightGray, border = Color.Black;
         private Color left, right, added, removed;
@@ -90,7 +90,7 @@ namespace Zapoctak.gui
                 if (dis > 0)
                     gr.FillRectangle(new SolidBrush(added), mainEnd, 0, dis, 10);
                 else
-                    gr.FillRectangle(new SolidBrush(removed), mainEnd-dis, 0, -dis, 10);
+                    gr.FillRectangle(new SolidBrush(removed), mainEnd+dis, 0, -dis, 10);
             }
 
             Pen borderPen = new Pen(border, 2);

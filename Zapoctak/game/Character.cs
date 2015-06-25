@@ -29,11 +29,16 @@ namespace Zapoctak.game
             weapon = armor = null;
         }
 
+        override public void TimeReady()
+        {
+
+        }
+
         public override string ToString()
         {
             return "[Char] Class: " + info.name
-               + ", weapon: " + U.ToString(weapon)
-               + ", armor: " + U.ToString(armor);
+               + ", w: " + U.ToString(weapon)
+               + ", a: " + U.ToString(armor);
         }
     }
 }
