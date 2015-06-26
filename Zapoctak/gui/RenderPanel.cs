@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Zapoctak.resources;
 using Zapoctak.game;
 using Zapoctak.game.monsters;
+using Zapoctak.game.events;
 
 namespace Zapoctak.gui
 {
@@ -27,6 +28,8 @@ namespace Zapoctak.gui
         private const float width = 1024, height = 512; // virtual
         private const float entWidth = 512, entHeight = 512; // entity dimensions
 
+        private static Font floatFont = new Font(FontFamily.GenericMonospace, 20, FontStyle.Bold);
+
         private Image background = TextureManager.getOtherTexture(bgName);
         private Game game;
 
@@ -36,7 +39,6 @@ namespace Zapoctak.gui
 
         private Matrix dummy;
 
-        private float[,] defaultPositions;
         private float[,] positions;
 
         private InfoPanel infoPanel;
@@ -49,7 +51,7 @@ namespace Zapoctak.gui
 
             float ratio = .75f;
             Width = (int)(width * ratio);
-            Height = 150+(int)(height * ratio);
+            Height = 10 + 150 + (int)(height * ratio);
 
             var margin = Margin;
             margin.All = 0;
@@ -71,14 +73,9 @@ namespace Zapoctak.gui
             entityMatrix.Scale(.2f, .2f);
 
             //entity positions
-            defaultPositions = new float[game.entities.Length, 2];
             positions = new float[game.entities.Length, 2];
             initPlayerPos();
             initMonsterPos();
-            for(int i = 0; i<game.entities.Length; i++) {
-                positions[i, 0] = defaultPositions[i, 0];
-                positions[i, 1] = defaultPositions[i, 1];
-            }
 
             //equip
             weaponPos = new Matrix();
@@ -97,7 +94,7 @@ namespace Zapoctak.gui
 
             //info
             infoMatrix = new Matrix();
-            infoMatrix.Translate(0, ratio*height);
+            infoMatrix.Translate(0, 5 + ratio * height);
         }
 
         private void initPlayerPos()
@@ -110,8 +107,8 @@ namespace Zapoctak.gui
             for (int i = 0; i < game.characters.Length; i++)
             {
                 float coef = i - (game.characters.Length - 1) / 2f;
-                defaultPositions[i, 0] = playerX + coef * playerDX;
-                defaultPositions[i, 1] = playerY + coef * playerDY;
+                positions[i, 0] = playerX + coef * playerDX;
+                positions[i, 1] = playerY + coef * playerDY;
             }
         }
 
@@ -129,8 +126,8 @@ namespace Zapoctak.gui
                 for (int j = 0; j < split[i]; j++, k++)
                 {
                     float y = monsterY + monsterDY * (j - (split[i] - 1) / 2f);
-                    defaultPositions[game.characters.Length + k, 0] = x;
-                    defaultPositions[game.characters.Length + k, 1] = y;
+                    positions[game.characters.Length + k, 0] = x;
+                    positions[game.characters.Length + k, 1] = y;
                 }
             }
         }
@@ -148,16 +145,39 @@ namespace Zapoctak.gui
             gr.Transform = projection;
             gr.DrawImage(background, 0, 0, width, height);
 
+            //attacking
+            Entity attacking = null;
+            Event curEvent = game.processer.getCurEvent();
+            if (curEvent != null && curEvent.data is AttackEvent)
+            {
+                attacking = curEvent.source;
+            }
+
             //characters
             for (int i = 0; i < game.characters.Length; i++)
             {
-                drawCharacter(gr, i);
+                if (game.characters[i] != attacking)
+                    drawCharacter(gr, game.characters[i], defPos(game.characters[i].entityId));
             }
 
             //monsters
             for (int i = 0; i < game.monsters.Length; i++)
             {
-                drawMonster(gr, game.monsters[i]);
+                if (game.monsters[i] != attacking)
+                    drawMonster(gr, game.monsters[i], defPos(game.monsters[i].entityId));
+            }
+
+            //attacking
+            if (attacking != null)
+            {
+                int sId = curEvent.source.entityId;
+                int tId = curEvent.target.entityId;
+                Matrix pos = (curEvent.data as AttackEvent).positionTrans(
+                    positions[sId, 0], positions[sId, 1], positions[tId, 0], positions[tId, 1]);
+                if (attacking is Character)
+                    drawCharacter(gr, attacking as Character, pos);
+                else
+                    drawMonster(gr, attacking as Monster, pos);
             }
 
             //info
@@ -166,46 +186,70 @@ namespace Zapoctak.gui
         }
 
         //with projection
-        private void setDummyOn(int entId)
+        private void setDummyOn(Matrix pos)
         {
             dummy.Reset();
             dummy.Multiply(entityMatrix);
-            dummy.Translate(defaultPositions[entId, 0], defaultPositions[entId, 1], MatrixOrder.Append);
+            dummy.Multiply(pos, MatrixOrder.Append);
             dummy.Multiply(projection, MatrixOrder.Append);
         }
 
-        private void drawCharacter(Graphics gr, int i)
+        private Matrix defPos(int entId)
         {
-            setDummyOn(i);
+            Matrix pos = new Matrix();
+            pos.Translate(positions[entId, 0], positions[entId, 1]);
+            return pos;
+        }
+
+        private void drawCharacter(Graphics gr, Character charac, Matrix pos)
+        {
+            setDummyOn(pos);
             gr.Transform = dummy;
-            gr.DrawImage(game.characters[i].info.image,
+            gr.DrawImage(charac.info.image,
                 -entWidth / 2, -entHeight / 2, entWidth, entHeight);
 
-            if (game.characters[i].weapon != null)
+            if (charac.weapon != null)
             {
-                setDummyOn(i);
+                setDummyOn(pos);
                 dummy.Multiply(weaponPos, MatrixOrder.Prepend);
                 dummy.Multiply(weaponRot, MatrixOrder.Prepend);
                 gr.Transform = dummy;
-                gr.DrawImage(game.characters[i].weapon.image,
+                gr.DrawImage(charac.weapon.image,
                     -entWidth / 2, -entHeight * 3 / 4, entWidth, entHeight);
             }
 
-            if (game.characters[i].armor != null)
+            if (charac.armor != null)
             {
-                setDummyOn(i);
+                setDummyOn(pos);
                 dummy.Multiply(armorPos, MatrixOrder.Prepend);
                 gr.Transform = dummy;
-                gr.DrawImage(game.characters[i].armor.image,
+                gr.DrawImage(charac.armor.image,
                     -entWidth / 2, -entHeight / 2, entWidth, entHeight);
             }
+
+            drawFloatingTexts(gr, charac, pos);
         }
 
-        private void drawMonster(Graphics gr, Monster m)
+        private void drawMonster(Graphics gr, Monster m, Matrix pos)
         {
-            setDummyOn(m.entityId);
+            setDummyOn(pos);
             gr.Transform = dummy;
             gr.DrawImage(m.info.texture, -entWidth / 2f, -entHeight / 2f, entWidth, entHeight);
+            drawFloatingTexts(gr, m, pos);
+        }
+
+        private void drawFloatingTexts(Graphics gr, Entity ent, Matrix pos)
+        {
+            float offset = -300;
+            foreach (var text in ent.getTexts())
+            {
+                setDummyOn(pos);
+                dummy.Translate(-200, -300+offset * (float)text.progress, MatrixOrder.Prepend);
+                dummy.Scale(5, 5, MatrixOrder.Prepend);
+                gr.Transform = dummy;
+
+                gr.DrawString(text.text, floatFont, new SolidBrush(text.color), 0, 0);
+            }
         }
     }
 }

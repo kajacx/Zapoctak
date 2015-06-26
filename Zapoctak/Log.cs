@@ -11,12 +11,12 @@ namespace Zapoctak
                          LV_BATTLE = 8, LV_DEBUG = 16, LV_ALL = 31;
         public static int lv = LV_ALL;
 
-        public static void e(String msg)
+        public static void E(String msg)
         {
             if ((lv & LV_ERROR) > 0) Console.WriteLine("Error: " + msg);
         }
 
-        public static void e(String msg, Exception ex)
+        public static void E(String msg, Exception ex)
         {
             if ((lv & LV_ERROR) > 0)
             {
@@ -25,27 +25,27 @@ namespace Zapoctak
             }
         }
 
-        public static void w(String msg)
+        public static void W(String msg)
         {
             if ((lv & LV_WARNING) > 0) Console.WriteLine("Warning: " + msg);
         }
 
-        public static void i(String msg)
+        public static void I(String msg)
         {
             if ((lv & LV_INFO) > 0) Console.WriteLine("Info: " + msg);
         }
 
-        public static void b(String msg)
+        public static void B(String msg)
         {
             if ((lv & LV_BATTLE) > 0) Console.WriteLine("Battle: " + msg);
         }
 
-        public static void d(String msg)
+        public static void D(String msg)
         {
             if ((lv & LV_DEBUG) > 0) Console.WriteLine("Debug: " + msg);
         }
 
-        public static void d(String format, params object[] args)
+        public static void D(String format, params object[] args)
         {
             if ((lv & LV_DEBUG) > 0) Console.WriteLine("Debug: " + format, args);
         }

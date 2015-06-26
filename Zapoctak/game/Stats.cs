@@ -21,7 +21,7 @@ namespace Zapoctak.game
                 case 4: return magic;
                 case 5: return resist;
             }
-            Log.e("Invalid stat id: "+id);
+            Log.E("Invalid stat id: "+id);
             return -1;
         }
 
@@ -35,7 +35,7 @@ namespace Zapoctak.game
                 case 3: maxmp = val; break;
                 case 4: magic = val; break;
                 case 5: resist = val; break;
-                default: Log.e("Invalid stat id: " + id); break;
+                default: Log.E("Invalid stat id: " + id); break;
             }
         }
 

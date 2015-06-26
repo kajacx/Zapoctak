@@ -40,7 +40,7 @@ namespace Zapoctak.game.monsters
                 rem -= p.prob;
                 if (rem < 0) return p;
             }
-            Log.e("Failure in random plan selection");
+            Log.E("Failure in random plan selection");
             return null;
         }
     }

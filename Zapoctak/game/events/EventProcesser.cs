@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Zapoctak.gui;
 
 namespace Zapoctak.game.events
 {
-    class EventProcesser
+    public class EventProcesser
     {
         private Queue<Event> queue = new Queue<Event>();
         private Event current; //not in queue
@@ -73,8 +74,8 @@ namespace Zapoctak.game.events
             if (ef.target == Target.MP) target.mp = U.Clamp(target.mp + value, 0, target.stats.maxmp);
 
             //add floater
-            Log.b("Todo: add floating text for Effect from event: " + ev);
-            Log.b("Todo: add floating text for Effect: " + ef);
+            Log.D("Adding floating text for Effect: " + ef);
+            target.getTexts().Add(FloatingText.FromEffect(ef));
 
             //reset time loader
             ev.source.TimeReset();

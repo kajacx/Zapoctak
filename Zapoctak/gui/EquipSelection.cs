@@ -105,7 +105,7 @@ namespace Zapoctak.gui
         {
             if (curChar != null)
                 setEquipType((EquipType)((Control)sender).Tag);
-            Log.d("Equip panel selected");
+            Log.D("Equip panel selected");
         }
 
         private void onEquipClicked(object sender, EventArgs args)
@@ -115,7 +115,7 @@ namespace Zapoctak.gui
             else
                 curChar.armor = (Equip)((Control)sender).Tag;
             setCharacter(curChar);
-            Log.d("Equip selected");
+            Log.D("Equip selected");
         }
 
         public void setEquipType(EquipType type)

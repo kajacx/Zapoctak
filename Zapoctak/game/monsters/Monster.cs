@@ -17,7 +17,7 @@ namespace Zapoctak.game.monsters
         override public void TimeReady()
         {
             game.monsterReady(this);
-            Log.b(this + " ready");
+            Log.B(this + " ready");
         }
 
         public Event DrawRandomEvent()

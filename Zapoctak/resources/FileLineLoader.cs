@@ -80,7 +80,7 @@ namespace Zapoctak.resources
                 }
                 catch (Exception ex)
                 {
-                    Log.e("Error in loading line: "+line, ex);
+                    Log.E("Error in loading line: "+line, ex);
                 }
             }
 
@@ -92,7 +92,7 @@ namespace Zapoctak.resources
             string[] words = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
             if (words.Length < 8)
             {
-                Log.e("not enought arguments when creating character: " + line);
+                Log.E("not enought arguments when creating character: " + line);
                 return null;
             }
             CharacterInfo info = new CharacterInfo();
@@ -107,7 +107,7 @@ namespace Zapoctak.resources
             }
             catch (Exception ex)
             {
-                Log.e("Parse error in character: " + line, ex);
+                Log.E("Parse error in character: " + line, ex);
             }
 
             info.image = TextureManager.getCharacterTexture(words[7]);
@@ -120,7 +120,7 @@ namespace Zapoctak.resources
             string[] words = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
             if (words.Length < 9)
             {
-                Log.e("not enought arguments when creating equip: " + line);
+                Log.E("not enought arguments when creating equip: " + line);
                 return null;
             }
             Equip equip = new Equip();
@@ -136,7 +136,7 @@ namespace Zapoctak.resources
             }
             catch (Exception ex)
             {
-                Log.e("Parse error in equip: " + line, ex);
+                Log.E("Parse error in equip: " + line, ex);
             }
 
             equip.image = TextureManager.getEquipTexture(words[8]);
@@ -149,7 +149,7 @@ namespace Zapoctak.resources
             string[] words = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
             if (words[0].Equals("monster")) return (Object) monsterFromWords(words);
             else if (words[0].Equals("plan")) return (Object) planFromWords(words);
-            Log.w("Input error, not monter nor plan: "+words[0]);
+            Log.W("Input error, not monter nor plan: "+words[0]);
             return null;
         }
 

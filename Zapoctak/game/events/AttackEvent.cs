@@ -26,14 +26,15 @@ namespace Zapoctak.game.events
         {
             float coef = (float) (progress > 1 ? 2 - progress : progress);
 
-            float x = coef * xs + (1 - coef) * xd;
-            float y = coef * ys + (1 - coef) * yd;
+            float x = coef * xd + (1 - coef) * xs;
+            float y = coef * yd + (1 - coef) * ys;
 
             float yp = ((float)coef * 2 - 1) * U.SQRT2DIV2; //map
-            yp = (float) Math.Sqrt(1+yp*yp);
+            yp = (float)Math.Sqrt(1 - yp * yp) - U.SQRT2DIV2;
+            yp *= 200;
 
             Matrix ret = new Matrix();
-            ret.Translate(x, y + yp);
+            ret.Translate(x, y - yp);
 
             return ret;
         }

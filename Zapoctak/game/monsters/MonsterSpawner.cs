@@ -10,7 +10,7 @@ namespace Zapoctak.game.monsters
         public static Monster[] spawn(int players)
         {
             int count = 2 * players - 1 + U.ran.Next(3);
-            Log.d("Number of monsters: "+count);
+            Log.D("Number of monsters: "+count);
             Monster[] ret = new Monster[count];
 
             double infosProbSum = 0;
@@ -41,7 +41,7 @@ namespace Zapoctak.game.monsters
                 choice -= mi.spawnProb;
                 if (choice < 0) return mi;
             }
-            Log.e("Random monster info selection failed");
+            Log.E("Random monster info selection failed");
             return null;
         }
     }

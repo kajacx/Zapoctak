@@ -24,7 +24,7 @@ namespace Zapoctak.resources
             else
             {
                 Image ret;
-                Log.w("Texture not found: " + path);
+                Log.W("Texture not found: " + path);
                 textures.TryGetValue(NOT_FOUND, out ret);
                 return ret;
             }

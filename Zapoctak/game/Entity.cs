@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using Zapoctak.gui;
 
 namespace Zapoctak.game
 {
@@ -12,6 +13,12 @@ namespace Zapoctak.game
 
         private bool timeReady;
         public Game game;
+        private List<FloatingText> texts = new List<FloatingText>();
+
+        internal List<FloatingText> getTexts()
+        {
+            return texts;
+        }
 
         public void replenish()
         {
@@ -21,6 +28,7 @@ namespace Zapoctak.game
 
         public void update(double dt)
         {
+            //action
             if (!timeReady)
             {
                 time += dt * Game.timeLoadSpeed;
@@ -28,6 +36,16 @@ namespace Zapoctak.game
                 {
                     timeReady = true;
                     TimeReady();
+                }
+            }
+
+            //flaoting texts
+            for (int i = 0; i < texts.Count; i++)
+            {
+                if (texts[i].update(dt))
+                {
+                    texts.RemoveAt(i);
+                    i--;
                 }
             }
         }

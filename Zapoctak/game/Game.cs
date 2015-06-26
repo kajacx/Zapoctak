@@ -26,7 +26,7 @@ namespace Zapoctak.game
 
         delegate void Runnable();
 
-        private EventProcesser processer = new EventProcesser();
+        public EventProcesser processer = new EventProcesser();
 
         public Game(Character[] characters)
         {
@@ -89,7 +89,7 @@ namespace Zapoctak.game
                 }
                 catch (Exception ex)
                 {
-                    Log.d("Exception in main program loop", ex);
+                    Log.D("Exception in main program loop", ex);
                     run = false;
                 }
             }
