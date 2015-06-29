@@ -9,7 +9,8 @@ namespace Zapoctak.game.events
     class MagicEvent : EventData
     {
         public Magic magic;
-        public double progress;
+        public double progress; //0 - duration
+        public const double duration = 1.5;
 
         public MagicEvent(Magic magic)
         {
@@ -19,7 +20,12 @@ namespace Zapoctak.game.events
         public bool update(double dt)
         {
             progress += dt;
-            throw new NotImplementedException();
+            if (progress >= duration)
+            {
+                progress = duration;
+                return true;
+            }
+            return false;
         }
 
         public Effect getEffect(Entity caster)

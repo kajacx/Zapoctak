@@ -22,7 +22,7 @@ namespace Zapoctak.game.monsters
 
         public Event DrawRandomEvent()
         {
-            Plan plan = info.randPlan();
+            Plan plan = info.randPlan(mp);
 
             Entity target = null;
             switch (plan.target)

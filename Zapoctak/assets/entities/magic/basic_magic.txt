@@ -1,3 +1,3 @@
-#name, mana, gold, amont, damage, target, frameDuration, frames
-Fire     35   120     40  DAMAGE      HP            .05  fire_0.png fire_1.png fire_2.png fire_3.png
-#Heal    20   140     35    HEAL      MP            .05  heal_0.png heal_1.png heal_2.png heal_3.png
+#name, mana, gold, amount, damage, target, frameDuration, frames
+Fire     35   120      40  DAMAGE      HP            .05  fire_0.png fire_1.png fire_2.png fire_3.png
+Heal     20   140      35    HEAL      HP            .05  heal_0.png heal_1.png heal_2.png heal_3.png

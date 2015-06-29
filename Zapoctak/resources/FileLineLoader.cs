@@ -39,8 +39,12 @@ namespace Zapoctak.resources
             var ret = new List<MonsterInfo>();
             for (int i = 0; i < data.Length; i++)
             {
-                if (data[i] is MonsterInfo) ret.Add((MonsterInfo) data[i]);
-                else ret[ret.Count - 1].plans.Add((Plan)data[i]);
+                if (data[i] is MonsterInfo) ret.Add((MonsterInfo)data[i]);
+                else
+                {
+                    Log.D("Adding plan for monster");
+                    ret[ret.Count - 1].plans.Add((Plan)data[i]);
+                }
             }
             ret.ForEach(m => m.countProbSum());
             return ret.ToArray();
@@ -86,7 +90,7 @@ namespace Zapoctak.resources
                 }
                 catch (Exception ex)
                 {
-                    Log.E("Error in loading line: "+line, ex);
+                    Log.E("Error in loading line: " + line, ex);
                 }
             }
 
@@ -153,9 +157,9 @@ namespace Zapoctak.resources
         private static Object monsterOrActionFromLine(string line)
         {
             string[] words = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
-            if (words[0].Equals("monster")) return (Object) monsterFromWords(words);
-            else if (words[0].Equals("plan")) return (Object) planFromWords(words);
-            Log.W("Input error, not monter nor plan: "+words[0]);
+            if (words[0].Equals("monster")) return (Object)monsterFromWords(words);
+            else if (words[0].Equals("plan")) return (Object)planFromWords(words);
+            Log.W("Input error, not monster nor plan: " + words[0]);
             return null;
         }
 
@@ -176,7 +180,23 @@ namespace Zapoctak.resources
 
         private static Plan planFromWords(string[] words)
         {
-            return null;
+            Plan plan;
+            if (!words[1].Equals("magic")) return null;
+
+            Magic m = null;
+            Magic.magicMap.TryGetValue(words[2].ToLower(), out m);
+            if (m == null) return null;
+
+            plan = new UseMagic(m);
+            if (words[3].Equals("SELF")) plan.target = Plan.Target.SELF;
+            else if (words[3].Equals("ALLY")) plan.target = Plan.Target.ALLY;
+            else if (words[3].Equals("FOE")) plan.target = Plan.Target.FOE;
+            else if (words[3].Equals("ALL")) plan.target = Plan.Target.ALL;
+            else return null;
+
+            plan.prob = Double.Parse(words[4], CultureInfo.InvariantCulture);
+
+            return plan;
         }
 
         private static Magic magicFromLine(string line)
@@ -186,6 +206,7 @@ namespace Zapoctak.resources
             //#name, mana, gold, amont, damage, target, frameDuration, frames
             Magic magic = new Magic();
             magic.name = words[0].Replace("_", " ");
+            magic.manaCost = Double.Parse(words[1], CultureInfo.InvariantCulture);
             magic.goldCost = Convert.ToInt32(words[2]);
             magic.frameDuration = Double.Parse(words[6], CultureInfo.InvariantCulture);
 
@@ -195,7 +216,7 @@ namespace Zapoctak.resources
             magic.effect.target = words[5].Equals("HP") ? Target.HP : Target.MP;
             magic.effect.type = DamageType.AP;
 
-            for(int i = 7; i<words.Length; i++)
+            for (int i = 7; i < words.Length; i++)
                 magic.frames.Add(TextureManager.getMagicTexture(words[i]));
 
             return magic;

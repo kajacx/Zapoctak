@@ -108,7 +108,7 @@ namespace Zapoctak.gui
 
             //menu
             menuMatrix = new Matrix();
-            menuMatrix.Translate(4*(130+10), 5 + ratio * height);
+            menuMatrix.Translate(4 * (130 + 10), 5 + ratio * height);
         }
 
         private void initPlayerPos()
@@ -202,6 +202,12 @@ namespace Zapoctak.gui
                 drawFloatingTexts(gr, attacking, pos);
             }
 
+            //magic
+            if (curEvent != null && curEvent.data is MagicEvent)
+            {
+                drawMagic(gr, curEvent.target, curEvent.data as MagicEvent);
+            }
+
             //info
             gr.Transform = infoMatrix;
             infoPanel.paint(gr);
@@ -264,6 +270,15 @@ namespace Zapoctak.gui
             drawFloatingTexts(gr, m, pos);
         }
 
+        private void drawMagic(Graphics gr, Entity target, MagicEvent ev)
+        {
+            setDummyOn(defPos(target.entityId));
+            gr.Transform = dummy;
+            int framen = (int)(ev.progress / ev.magic.frameDuration) % ev.magic.frames.Count;
+            Image frame = ev.magic.frames[framen];
+            gr.DrawImage(frame, -256, -256, 512, 512);
+        }
+
         private void drawFloatingTexts(Graphics gr, Entity ent, Matrix pos)
         {
             //also selector
@@ -280,7 +295,7 @@ namespace Zapoctak.gui
             foreach (var text in ent.getTexts())
             {
                 setDummyOn(pos);
-                dummy.Translate(-200, -300+offset * (float)text.progress, MatrixOrder.Prepend);
+                dummy.Translate(-200, -300 + offset * (float)text.progress, MatrixOrder.Prepend);
                 dummy.Scale(5, 5, MatrixOrder.Prepend);
                 gr.Transform = dummy;
 

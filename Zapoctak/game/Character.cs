@@ -25,6 +25,24 @@ namespace Zapoctak.game
             }
         }
 
+        //TODO: replace this method with proper magic equiping menu
+        public void setMagic()
+        {
+            if (info.name.Equals("Wizzard"))
+            {
+                magic.Add(Magic.magicMap["fire"]);
+                magic.Add(Magic.magicMap["heal"]);
+            }
+            else if (info.name.Equals("Fighter")) {
+                magic.Add(Magic.magicMap["fire"]);
+            }
+        }
+
+        public bool hasManaFor(int spellId)
+        {
+            return mp >= magic[spellId].manaCost;
+        }
+
         public void unequip()
         {
             weapon = armor = null;

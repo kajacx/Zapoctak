@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Zapoctak.gui;
+using Zapoctak.game.monsters;
 
 namespace Zapoctak.game.events
 {
@@ -37,25 +38,7 @@ namespace Zapoctak.game.events
             {
                 if (queue.Count > 0)
                 {
-                    current = queue.Dequeue();
-
-                    //handle dead entities
-                    if (current.source.isDead)
-                    {
-                        Log.D("Ignoring effect from dead entity: " + current);
-                        current = null;
-                        return;
-                    }
-                    if (current.target.isDead) //TODO: redirect
-                    {
-                        Log.W("Ignoring effect to dead entity, should be redirected: " + current);
-                        //reset time loader
-                        current.source.TimeReset();
-                        current = null;
-                        return;
-                    }
-
-                    if (current.source is Character) (current.source as Character).msg = "On turn";
+                    setCurrent(queue.Dequeue());
                 }
                 else return;
             }
@@ -69,6 +52,41 @@ namespace Zapoctak.game.events
             }
         }
 
+        private void setCurrent(Event current)
+        {
+            this.current = current;
+
+            //handle dead entities
+            if (current.source.isDead)
+            {
+                Log.D("Ignoring effect from dead entity: " + current);
+                this.current = null;
+                return;
+            }
+            if (current.target.isDead) //TODO: redirect
+            {
+                Log.W("Ignoring effect to dead entity, should be redirected: " + current);
+                //reset time loader
+                current.source.TimeReset();
+                this.current = null;
+                return;
+            }
+
+            if (current.source is Character) (current.source as Character).msg = "On turn";
+            if (current.data is MagicEvent)
+            {
+                double manaCost = (current.data as MagicEvent).magic.manaCost;
+                if (manaCost > current.source.mp)
+                {
+                    Log.E("Attempt to use magic with low mana: " + current);
+                    current.source.TimeReset();
+                    this.current = null;
+                    return;
+                }
+                current.source.mp -= manaCost;
+            }
+        }
+
         public void processEffect(Event ev)
         {
             Effect ef = ev.data.getEffect(ev.source);
@@ -77,7 +95,7 @@ namespace Zapoctak.game.events
             // dead enities?
             if (ev.source.isDead || ev.target.isDead)
             {
-                Log.E("Dead entities in event: "+ev);
+                Log.E("Dead entities in event: " + ev);
                 return;
             }
 

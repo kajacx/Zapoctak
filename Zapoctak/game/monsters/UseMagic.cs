@@ -8,7 +8,7 @@ namespace Zapoctak.game.monsters
 {
     class UseMagic : Plan
     {
-        private Magic magic;
+        public Magic magic;
 
         public UseMagic(Magic magic)
         {

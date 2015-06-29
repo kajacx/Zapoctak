@@ -32,16 +32,29 @@ namespace Zapoctak.game.monsters
                 probSum += p.prob;
         }
 
-        public Plan randPlan()
+        public Plan randPlan(double mp)
         {
             double rem = U.ran.NextDouble()*probSum;
+            Plan plan = null;
             foreach (Plan p in plans)
             {
                 rem -= p.prob;
-                if (rem < 0) return p;
+                if (rem < 0)
+                {
+                    plan = p;
+                    break;
+                }
             }
-            Log.E("Failure in random plan selection");
-            return null;
+            if (plan == null)
+            {
+                Log.E("Failure in random plan selection");
+                return null;
+            }
+            if (plan is UseMagic && (plan as UseMagic).magic.manaCost > mp) {
+                Log.B("Monster drawed magic plan with low mana, drawing attack instead");
+                return plans[0];
+            }
+            return plan;
         }
     }
 }

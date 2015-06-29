@@ -13,7 +13,7 @@ namespace Zapoctak.game
 {
     public class Game
     {
-        public const double timeLoadSpeed = .1; //5 seconds to load
+        public const double timeLoadSpeed = .1; //10 seconds to load
 
         public Character[] characters;
         public Monster[] monsters;
@@ -41,6 +41,7 @@ namespace Zapoctak.game
                 characters[i].replenish();
                 characters[i].game = this;
                 characters[i].time = U.ran.NextDouble() / 3 + 0.4;
+                characters[i].setMagic();
             }
 
             monsters = MonsterSpawner.spawn(characters.Length);
@@ -110,6 +111,7 @@ namespace Zapoctak.game
 
         public void RelinkEntities(Character[] chars, Monster[] monsters, int[] splitting)
         {
+            //monsters
             for (int col = 0, count = 0; col < splitting.Length; col++)
             {
                 for (int row = 0; row < splitting[col]; row++, count++)
@@ -128,6 +130,41 @@ namespace Zapoctak.game
                     if (col == splitting.Length - 1) monsters[count].right = monsters[count];
                     else monsters[count].right = monsters[count + splitting[col] +
                         Math.Min(0, splitting[col + 1] - row - 1)];
+                }
+            }
+
+            //characters
+            for (int i = 0; i < characters.Length; i++)
+            {
+                //up
+                characters[i].up = characters[U.Clamp(i - 1, 0, characters.Length)];
+
+                //right
+                characters[i].right = characters[i];
+
+                //down
+                characters[i].down = characters[U.Clamp(i + 1, 0, characters.Length - 1)];
+            }
+
+            //monster-characters
+            int mCount = splitting[splitting.Length - 1]; //monsters count in last col
+            int mOffset = monsters.Length - mCount; //first index of relevant monster
+            for (int i = 0, j = characters.Length - 1; i < mCount || j >= 0; i++, j--)
+            {
+                if (i == mCount)
+                {
+                    i--;
+                    characters[j].left = monsters[mOffset + i];
+                }
+                else if (j < 0)
+                {
+                    j++;
+                    monsters[mOffset + i].right = characters[j];
+                }
+                else
+                {
+                    monsters[mOffset + i].right = characters[j];
+                    characters[j].left = monsters[mOffset + i];
                 }
             }
         }
@@ -183,8 +220,8 @@ namespace Zapoctak.game
             }
             if (monsters.Length == 0)
             {
-                Log.I("TODO: display wictory");
-                MessageBox.Show("Wictory!");
+                Log.I("TODO: display victory");
+                MessageBox.Show("Victory!");
 
                 //form.Close();
                 Runnable r = form.Close;

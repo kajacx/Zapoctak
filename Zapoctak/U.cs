@@ -23,6 +23,13 @@ namespace Zapoctak
             return val;
         }
 
+        public static int Clamp(int val, int min, int max)
+        {
+            if (val < min) return min;
+            if (val > max) return max;
+            return val;
+        }
+
         public static int Mod(int n, int m)
         {
             int ret = n % m;
