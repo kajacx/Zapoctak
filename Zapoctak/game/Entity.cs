@@ -11,6 +11,10 @@ namespace Zapoctak.game
         public double hp, mp;
         public double time; //0-1 
 
+        public Entity up, right, down, left; //other entites or self
+
+        public bool isDead;
+
         private bool timeReady;
         public Game game;
         private List<FloatingText> texts = new List<FloatingText>();
@@ -28,6 +32,12 @@ namespace Zapoctak.game
 
         public void update(double dt)
         {
+            if (isDead)
+            {
+                Log.W("Updating dead entity: "+this);
+                return;
+            }
+
             //action
             if (!timeReady)
             {

@@ -12,6 +12,7 @@ namespace Zapoctak.game
         public Equip armor;
 
         public List<Magic> magic = new List<Magic>();
+        public string msg;
 
         public void recomputeStats()
         {
@@ -31,7 +32,8 @@ namespace Zapoctak.game
 
         override public void TimeReady()
         {
-
+            msg = "Ready";
+            game.charReady(this);
         }
 
         public override string ToString()

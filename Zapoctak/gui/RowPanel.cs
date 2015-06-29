@@ -14,6 +14,8 @@ namespace Zapoctak.gui
         private DisplayPanel hpPanel, mpPanel, timePanel;
 
         private static Matrix hpMatrix = new Matrix(), mpMatrix = new Matrix(), timeMatrix = new Matrix();
+        private static Brush redBrush = new SolidBrush(Color.Red);
+        private static Brush grayBrush = new SolidBrush(Color.Gray);
 
         public RowPanel(Character character)
         {
@@ -25,19 +27,25 @@ namespace Zapoctak.gui
 
         public void update(double time)
         {
-            hpPanel.setValue(character.hp);
+            hpPanel.setValue(character.isDead ? 0 : character.hp);
             hpPanel.update(time);
 
-            mpPanel.setValue(character.mp);
+            mpPanel.setValue(character.isDead ? 0 : character.mp);
             mpPanel.update(time);
 
-            timePanel.setValue(character.time * 100);
+            timePanel.setValue(character.isDead ? 0 : character.time * 100);
+            if (!character.isDead && character.time >= .999)
+                timePanel.setMsg(character.msg);
             timePanel.update(time);
         }
 
         public void paint(Graphics gr)
         {
-            gr.DrawString(character.info.name, DisplayPanel.font, DisplayPanel.fontBrush, 15, 5);
+            Brush brush;
+            if (character.game.selector.activeCharacter == character) brush = redBrush;
+            else if (character.isDead) brush = grayBrush;
+            else brush = DisplayPanel.fontBrush;
+            gr.DrawString(character.info.name, DisplayPanel.font, brush, 15, 5);
 
             Matrix orig = gr.Transform;
             Matrix tmp;

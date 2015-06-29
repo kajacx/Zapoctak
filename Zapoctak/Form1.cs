@@ -18,6 +18,7 @@ namespace Zapoctak
         private CharacterSelection charSel = new CharacterSelection();
         private EquipSelection equipSel = new EquipSelection();
         private UserControl1 control;
+        private Game game;
 
         public Form1()
         {
@@ -26,7 +27,7 @@ namespace Zapoctak
             initStuff();
 
             Controls.Add(control);
-
+            this.Focus();
         }
 
         private void initStuff()
@@ -36,6 +37,7 @@ namespace Zapoctak
             CharacterInfo.allInfos = FileLineLoader.LoadCharInfos();
             Equip.allWeapons = FileLineLoader.LoadWeapons();
             Equip.allArmors = FileLineLoader.LoadArmors();
+            Magic.Init();
 
             //character selection
             control.bind(charSel);
@@ -65,18 +67,30 @@ namespace Zapoctak
         {
             Controls.Remove(control);
 
-            Game game = createGame();
+            game = new Game(charSel.gatherChars());
+            game.form = this;
 
             Controls.Add(new RenderPanel(game));
             Refresh();
 
             game.Start();
+
+            this.Invalidate();
+            this.Refresh();
         }
 
-        private Game createGame()
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            Game game = new Game(charSel.gatherChars());
-            return game;
+            Log.D("Key pressed IN CMD: " + keyData);
+            game.selector.KeyPressed(keyData);
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            /*Log.D("Key pressed IN FORN: " + e.KeyCode);
+            if(game!=null)
+            game.selector.OnKeyPress(sender, e);*/
         }
 
     }

@@ -11,8 +11,8 @@ namespace Zapoctak.gui
 {
     public class RenderPanel : Panel
     {
-        private int[][] spliting = new int[][]{
-            null, //indexing from 1 lol
+        public static int[][] spliting = new int[][]{
+            new int[0], //indexing from 1 lol
             new int[]{ 1 },
             new int[]{ 2 },
             new int[]{ 3 },
@@ -42,7 +42,7 @@ namespace Zapoctak.gui
         private float[,] positions;
 
         private InfoPanel infoPanel;
-        private Matrix infoMatrix;
+        private Matrix infoMatrix, menuMatrix;
 
         public RenderPanel(Game game)
         {
@@ -61,6 +61,16 @@ namespace Zapoctak.gui
             infoPanel = new InfoPanel(game.characters);
 
             this.DoubleBuffered = true;
+            //this.OnKeyDown += new KeyEventHandler(game.selector.OnKeyPress);
+            this.Focus();
+        }
+
+        public void EntityDied()
+        {
+            //entity positions
+            positions = new float[game.entities.Length, 2];
+            initPlayerPos();
+            initMonsterPos();
         }
 
         private void initMatrices(float ratio)
@@ -95,6 +105,10 @@ namespace Zapoctak.gui
             //info
             infoMatrix = new Matrix();
             infoMatrix.Translate(0, 5 + ratio * height);
+
+            //menu
+            menuMatrix = new Matrix();
+            menuMatrix.Translate(4*(130+10), 5 + ratio * height);
         }
 
         private void initPlayerPos()
@@ -116,7 +130,7 @@ namespace Zapoctak.gui
         {
             float monsterX = .2f * width;
             float monsterY = .5f * height;
-            float monsterDX = -120;
+            float monsterDX = 120;
             float monsterDY = -120;
 
             int[] split = spliting[game.monsters.Length];
@@ -167,6 +181,13 @@ namespace Zapoctak.gui
                     drawMonster(gr, game.monsters[i], defPos(game.monsters[i].entityId));
             }
 
+            //floating text
+            for (int i = 0; i < game.entities.Length; i++)
+            {
+                if (game.entities[i] != attacking)
+                    drawFloatingTexts(gr, game.entities[i], defPos(game.entities[i].entityId));
+            }
+
             //attacking
             if (attacking != null)
             {
@@ -178,11 +199,16 @@ namespace Zapoctak.gui
                     drawCharacter(gr, attacking as Character, pos);
                 else
                     drawMonster(gr, attacking as Monster, pos);
+                drawFloatingTexts(gr, attacking, pos);
             }
 
             //info
             gr.Transform = infoMatrix;
             infoPanel.paint(gr);
+
+            //menu
+            gr.Transform = menuMatrix;
+            game.selector.paint(gr);
         }
 
         //with projection
@@ -240,6 +266,16 @@ namespace Zapoctak.gui
 
         private void drawFloatingTexts(Graphics gr, Entity ent, Matrix pos)
         {
+            //also selector
+            if (ent == game.selector.targetetEntity)
+            {
+                setDummyOn(pos);
+                dummy.Translate(0, -300);
+                gr.Transform = dummy;
+                gr.DrawImage(MenuSelector.cursor, -128, -128, 256, 256);
+            }
+
+            //flaoting texts
             float offset = -300;
             foreach (var text in ent.getTexts())
             {

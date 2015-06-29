@@ -22,5 +22,11 @@ namespace Zapoctak
             if (val > max) return max;
             return val;
         }
+
+        public static int Mod(int n, int m)
+        {
+            int ret = n % m;
+            return ret >= 0 ? ret : m + ret;
+        }
     }
 }

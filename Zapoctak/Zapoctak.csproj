@@ -65,6 +65,7 @@
     <Compile Include="game\events\MagicEvent.cs" />
     <Compile Include="game\Game.cs" />
     <Compile Include="game\Magic.cs" />
+    <Compile Include="game\MenuSelector.cs" />
     <Compile Include="game\monsters\Monster.cs" />
     <Compile Include="game\monsters\MonsterSpawner.cs" />
     <Compile Include="game\monsters\Plan.cs" />
@@ -77,7 +78,6 @@
     <Compile Include="gui\FloatingText.cs" />
     <Compile Include="gui\InfoPanel.cs" />
     <Compile Include="gui\RowPanel.cs" />
-    <Compile Include="gui\Sprite.cs" />
     <Compile Include="gui\CharacterSelection.cs" />
     <Compile Include="gui\EquipSelection.cs" />
     <Compile Include="gui\RenderPanel.cs">

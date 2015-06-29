@@ -5,11 +5,11 @@ using System.IO;
 
 namespace Zapoctak.resources
 {
-    class TextureManager
+    static class TextureManager
     {
         //ALL pathsin format: data/img/...
         private const string NOT_FOUND = "assets/img/other/texture_not_found.png";
-        private static Dictionary<String, Image> textures = new Dictionary<string,Image>();
+        private static Dictionary<String, Image> textures = new Dictionary<string, Image>();
 
         public const string noChar = "no_character.png";
         public const string defWeapon = "";
@@ -67,6 +67,11 @@ namespace Zapoctak.resources
         public static Image getMonsterTexture(string name)
         {
             return getTexture("assets/img/monsters/" + name);
+        }
+
+        public static Image getMagicTexture(string name)
+        {
+            return getTexture("assets/img/magic/" + name);
         }
     }
 }

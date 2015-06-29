@@ -63,7 +63,7 @@ namespace Zapoctak.gui
         {
             if (inPercent)
             {
-                if (msg != null) return msg;
+                if (bar.getCurVal() >= 99.9 && msg != null) return msg;
                 return (int)bar.getCurVal() + "%";
             }
             return (int)bar.getCurVal() + " / " + (int)max;

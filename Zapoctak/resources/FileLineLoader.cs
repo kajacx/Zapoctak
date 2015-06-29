@@ -46,6 +46,12 @@ namespace Zapoctak.resources
             return ret.ToArray();
         }
 
+        public static Magic[] LoadMagic()
+        {
+            var magic = loadFromDir("assets/entities/magic", magicFromLine);
+            return magic;
+        }
+
         private static T[] loadFromDir<T>(String dirName, lineParser<T> parser)
         {
             var dir = ResourceManager.loadFile(dirName);
@@ -171,6 +177,28 @@ namespace Zapoctak.resources
         private static Plan planFromWords(string[] words)
         {
             return null;
+        }
+
+        private static Magic magicFromLine(string line)
+        {
+            string[] words = line.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
+
+            //#name, mana, gold, amont, damage, target, frameDuration, frames
+            Magic magic = new Magic();
+            magic.name = words[0].Replace("_", " ");
+            magic.goldCost = Convert.ToInt32(words[2]);
+            magic.frameDuration = Double.Parse(words[6], CultureInfo.InvariantCulture);
+
+            magic.effect = new Effect();
+            magic.effect.amount = Double.Parse(words[3], CultureInfo.InvariantCulture);
+            magic.effect.damageHeal = words[4].Equals("DAMAGE") ? DamageHeal.DAMAGE : DamageHeal.HEAL;
+            magic.effect.target = words[5].Equals("HP") ? Target.HP : Target.MP;
+            magic.effect.type = DamageType.AP;
+
+            for(int i = 7; i<words.Length; i++)
+                magic.frames.Add(TextureManager.getMagicTexture(words[i]));
+
+            return magic;
         }
     }
 }
