@@ -284,11 +284,11 @@ namespace Zapoctak
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Goldenrod;
-            this.label7.Location = new System.Drawing.Point(378, 20);
+            this.label7.Location = new System.Drawing.Point(390, 19);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 16);
+            this.label7.Size = new System.Drawing.Size(16, 16);
             this.label7.TabIndex = 22;
-            this.label7.Text = "5 000";
+            this.label7.Text = "0";
             // 
             // label8
             // 
@@ -753,9 +753,10 @@ namespace Zapoctak
             // 
             // panel1
             // 
+            this.panel1.AutoScroll = true;
             this.panel1.Location = new System.Drawing.Point(356, 253);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(193, 118);
+            this.panel1.Size = new System.Drawing.Size(193, 223);
             this.panel1.TabIndex = 69;
             // 
             // panel2

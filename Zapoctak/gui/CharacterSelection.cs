@@ -82,6 +82,7 @@ namespace Zapoctak.gui
                 pictures[id].Image = currentSelection[id].info.image;
             }
             characterChangedEvent(selected[id] ? currentSelection[id] : null);
+            Shop.shop.recompute();
             control.Refresh();
         }
 

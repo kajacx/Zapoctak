@@ -95,6 +95,11 @@ namespace Zapoctak
             sel.armorPanel = panel3;
         }
 
+        public void bind(Shop shop)
+        {
+            shop.moneyLabel = label7;
+        }
+
         public Button getPlayButton()
         {
             return playButton;

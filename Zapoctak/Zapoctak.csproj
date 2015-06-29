@@ -83,6 +83,7 @@
     <Compile Include="gui\RenderPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="gui\Shop.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

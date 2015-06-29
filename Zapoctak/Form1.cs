@@ -44,6 +44,10 @@ namespace Zapoctak
             charSel.control = control;
             charSel.bindHadlers();
 
+            //shop
+            Shop.shop.selection = charSel;
+            control.bind(Shop.shop);
+
             //equip selection
             control.bind(equipSel);
             equipSel.control = control;
@@ -65,9 +69,21 @@ namespace Zapoctak
 
         private void playPressed(object sender, EventArgs args)
         {
+            var chars = charSel.gatherChars();
+            if (chars.Length == 0)
+            {
+                MessageBox.Show(this, "No characters");
+                return;
+            }
+            if (Shop.shop.money < 0)
+            {
+                MessageBox.Show(this, "Negative money");
+                return;
+            }
+
             Controls.Remove(control);
 
-            game = new Game(charSel.gatherChars());
+            game = new Game(chars);
             game.form = this;
 
             Controls.Add(new RenderPanel(game));

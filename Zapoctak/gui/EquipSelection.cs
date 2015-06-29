@@ -189,6 +189,7 @@ namespace Zapoctak.gui
                     ((charac.weapon == null ? 0 : charac.weapon.cost) +
                     (charac.armor == null ? 0 : charac.armor.cost)) + "";
             }
+            Shop.shop.recompute();
             control.Refresh();
         }
 
